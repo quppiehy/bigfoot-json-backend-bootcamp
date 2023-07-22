@@ -9,12 +9,26 @@ class sightingController {
 
   list = async (req, res) => {
     await this.initialize();
-    console.log(this.sightingArray[0]);
     res.send(this.sightingArray);
   };
 
   listByIndex = (req, res) => {
     res.json(this.sightingArray[req.params.sightingIndex]);
+  };
+
+  listByFilter = (req, res) => {
+    const filterVal = req.params.filterVal;
+    const filterInput = req.params.filterInput;
+    console.log(filterVal);
+    console.log(filterInput);
+    if (filterVal && filterInput) {
+      const filteredSightings = this.sightingArray.filter(
+        (sighting) => sighting[filterVal] === filterInput
+      );
+      res.json(filteredSightings);
+    } else {
+      res.json(this.sightingArray);
+    }
   };
 }
 

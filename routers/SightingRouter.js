@@ -1,7 +1,3 @@
-// const express = require("express");
-// const SightingController = require("../controllers/SightingController");
-// const sightingController = new SightingController();
-
 class SightingRouter {
   constructor(sightingController, express) {
     this.controller = sightingController;
@@ -12,6 +8,7 @@ class SightingRouter {
     let router = this.express.Router();
     router.get("/", this.controller.list);
     router.get("/:sightingIndex", this.controller.listByIndex);
+    router.get("/:filterVal/:filterInput", this.controller.listByFilter);
 
     return router;
   };
